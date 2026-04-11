@@ -52,8 +52,8 @@
         <!--正解を自動入力する-->
         <button type="button"
             onclick="fillAnswers()"
-            class="w-full bg-green-100 hover:bg-green-100 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 mb-4">
-
+            class="w-full bg-green-100 hover:bg-green-100 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 mb-4"> 
+            テスト用: 自動入力
         </button>
          <!-- ▲▲▲ 追加ここまで ▲▲▲ -->
 
@@ -101,7 +101,7 @@
                 <!-- お疲れ様画像 -->
                 <div class="flex justify-center mb-4">
                     <img src="https://drive.google.com/thumbnail?id=1SCrjqN_1AWq7w3_9XC_p8mKl5jwGOWbB&sz=w500" alt="お疲れ様" 
-                    class="max-w-full h-auto block mx-auto shadow-md">
+                    class="max-w-full h-auto block mx-auto shadow-md" />
                 </div>
                     <!-- ▼▼▼ 追加：1問だけのクイズ ▼▼▼ -->
                 <div id="extraQuiz" class="mt-6">
@@ -115,15 +115,12 @@
                         onclick="checkExtraQuiz()"
                         class="w-full bg-orange-500 hover:bg-orange-700 text-white font-bold py-3 px-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 mt-4">
                         解答する
-                </button>
-            <img id="extraImage" class="mx-auto mt-4 w-64 h-auto hidden"></img>
-            <p id="extraResult" class="mt-3 text-xl font-bold"></p>
-            </div>
-            <!-- ▲▲▲ 追加ここまで ▲▲▲ -->
+                    </button>
+                    <img id="extraImage" class="mx-auto mt-4 w-64 h-auto hidden" />
+                    <p id="extraResult" class="mt-3 text-xl font-bold"></p>
+                </div>
+                <!-- ▲▲▲ 追加ここまで ▲▲▲ -->
 
-        <!--　　<h2 class="text-xl font-bold text-gray-800 mb-2">お疲れ様でした！</h2>
-                <div id="scoreDisplay" class="text-3xl font-extrabold text-blue-600"></div>
-        -->    
                 <button onclick="location.reload()" class="mt-4 text-sm text-blue-500 underline">リセット</button>
             </div>
         </div>
@@ -169,68 +166,65 @@
 
         // 「最終結果を表示」ボタンを押した時の処理
         function showFinalResult() {
-    let score = 0;
+        let score = 0;
 
-    // ▼▼▼ どのセットが全問正解か判定 ▼▼▼
-    let usedSet = null;
+        // ▼▼▼ どのセットが全問正解か判定 ▼▼▼
+        let usedSet = null;
 
-    // セット1
-    if (inputs[0].value.trim() === correctAnswers1[0] &&
-        inputs[1].value.trim() === correctAnswers1[1] &&
-        inputs[2].value.trim() === correctAnswers1[2] &&
-        inputs[3].value.trim() === correctAnswers1[3]) {
-        usedSet = 1;
-    }
+        // セット1
+        if (inputs[0].value.trim() === correctAnswers1[0] &&
+            inputs[1].value.trim() === correctAnswers1[1] &&
+            inputs[2].value.trim() === correctAnswers1[2] &&
+            inputs[3].value.trim() === correctAnswers1[3]) {
+            usedSet = 1;
+        }
 
-    // セット2
-    if (inputs[0].value.trim() === correctAnswers2[0] &&
-        inputs[1].value.trim() === correctAnswers2[1] &&
-        inputs[2].value.trim() === correctAnswers2[2] &&
-        inputs[3].value.trim() === correctAnswers2[3]) {
-        usedSet = 2;
-    }
+        // セット2
+        if (inputs[0].value.trim() === correctAnswers2[0] &&
+            inputs[1].value.trim() === correctAnswers2[1] &&
+            inputs[2].value.trim() === correctAnswers2[2] &&
+            inputs[3].value.trim() === correctAnswers2[3]) {
+            usedSet = 2;
+        }
 
-    // セット3
-    if (inputs[0].value.trim() === correctAnswers3[0] &&
-        inputs[1].value.trim() === correctAnswers3[1] &&
-        inputs[2].value.trim() === correctAnswers3[2] &&
-        inputs[3].value.trim() === correctAnswers3[3]) {
-        usedSet = 3;
-    }
+        // セット3
+        if (inputs[0].value.trim() === correctAnswers3[0] &&
+            inputs[1].value.trim() === correctAnswers3[1] &&
+            inputs[2].value.trim() === correctAnswers3[2] &&
+            inputs[3].value.trim() === correctAnswers3[3]) {
+            usedSet = 3;
+        }
 
-    // セット4
-    if (inputs[0].value.trim() === correctAnswers4[0] &&
-        inputs[1].value.trim() === correctAnswers4[1] &&
-        inputs[2].value.trim() === correctAnswers4[2] &&
-        inputs[3].value.trim() === correctAnswers4[3]) {
-        usedSet = 4;
-    }
+        // セット4
+        if (inputs[0].value.trim() === correctAnswers4[0] &&
+            inputs[1].value.trim() === correctAnswers4[1] &&
+            inputs[2].value.trim() === correctAnswers4[2] &&
+            inputs[3].value.trim() === correctAnswers4[3]) {
+            usedSet = 4;
+        }
 
-    // ▼▼▼ スコア計算（従来通り） ▼▼▼
-    inputs.forEach((input, index) => {
-        if (input.value.trim() === correctAnswers1[index]) score++;
-    });
+        // ▼▼▼ スコア計算（従来通り） ▼▼▼
+        inputs.forEach((input, index) => {
+            if (input.value.trim() === correctAnswers1[index]) score++;
+        });
 
-    //const scoreDisplay = document.getElementById("scoreDisplay");
-    //scoreDisplay.textContent = `全問中 ${score} 問正解しました！`;
+        const resultImg = document.querySelector("#resultArea img");
 
-    const resultImg = document.querySelector("#resultArea img");
+            // ▼▼▼ セットごとに画像を切り替え ▼▼▼
+            if (usedSet === 1) {
+                resultImg.src = "https://drive.google.com/thumbnail?id=1SCrjqN_1AWq7w3_9XC_p8mKl5jwGOWbB&sz=w500";
+            } else if (usedSet === 2) {
+                resultImg.src = "https://drive.google.com/thumbnail?id=1zonYBALx-gIiWrRbw_mzU70z5finhA3p&sz=w500";
+            } else if (usedSet === 3) {
+                resultImg.src = "https://drive.google.com/thumbnail?id=1xVDr8wDxtPPwOb_B0IQezw3Cy9ijJdsw&sz=w500";
+            } else if (usedSet === 4) {
+                resultImg.src = "https://drive.google.com/thumbnail?id=1cqQSvxvhn9WIj5O9zfbgKjnw_lhgrG4S&sz=w500";
+            } else {
+            // 誤答あり
+                resultImg.src = "https://via.placeholder.com/500x300.png?text=Incorrect";
+            }
 
-        // ▼▼▼ セットごとに画像を切り替え ▼▼▼
-        if (usedSet === 1) {
-            resultImg.src = "https://drive.google.com/thumbnail?id=1SCrjqN_1AWq7w3_9XC_p8mKl5jwGOWbB&sz=w500";
-        } else if (usedSet === 2) {
-            resultImg.src = "https://drive.google.com/thumbnail?id=1zonYBALx-gIiWrRbw_mzU70z5finhA3p&sz=w500";
-        } else if (usedSet === 3) {
-            resultImg.src = "https://drive.google.com/thumbnail?id=1xVDr8wDxtPPwOb_B0IQezw3Cy9ijJdsw&sz=w500";
-        } else if (usedSet === 4) {
-            resultImg.src = "https://drive.google.com/thumbnail?id=1cqQSvxvhn9WIj5O9zfbgKjnw_lhgrG4S&sz=w500";
-        } else {
-        // 誤答あり
-            resultImg.src = "https://via.placeholder.com/500x300.png?text=Incorrect";
-       }
-
-        const resultArea = document.getElementById("resultArea");
+            const resultArea = document.getElementById("resultArea");
             resultArea.classList.remove("hidden");
             resultArea.scrollIntoView({ behavior: 'smooth' });
         }
@@ -239,7 +233,6 @@
         function fillAnswers() {
             inputs.forEach((input, index) => {
                 input.value = correctAnswers2[index];
-//                input.classList.add('input-correct1');
             });
         }
         // ▲▲▲ ここまで ▲▲▲
