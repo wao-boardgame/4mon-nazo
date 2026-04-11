@@ -227,7 +227,8 @@
             resultImg.src = "https://drive.google.com/thumbnail?id=1cqQSvxvhn9WIj5O9zfbgKjnw_lhgrG4S&sz=w500";
         } else {
         // 誤答あり
-            resultImg.src = "https://via.placeholder.com/500x300.png?text=Incorrect";
+            resultImg.classList.add("hidden");  // ← 画像を隠す
+            document.querySelector("#extraQuiz p").innerHTML = "答えが違います。もう一度挑戦してみてください。";
        }
 
         const resultArea = document.getElementById("resultArea");
