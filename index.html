@@ -1,261 +1,271 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>正誤判定</title>
-    <!-- Tailwind CSSの読み込み (スタイリング用) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* カスタムのCSSが必要な場合はここに記述します */
-        body {
-            background-color: #ffe5ce;
-            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
-        }
-        .input-correct1 {
-            border-color: #10b981 !important; /* green-500 */
-            background-color: #ecfdf5 !important; /* green-50 */
-            color: #047857 !important; /* green-700 */
-        }
-        .input-correct2 {
-            border-color: #b91010 !important; /* green-500 */
-            background-color: #fdecec !important; /* green-50 */
-            color: #780404 !important; /* green-700 */
-        } 
-        .input-correct3 {
-            border-color: #2c10b9 !important; /* green-500 */
-            background-color: #eeecfd !important; /* green-50 */
-            color: #040678 !important; /* green-700 */
-        }     
-        .input-correct4 {
-            border-color: #b97010 !important; /* green-500 */
-            background-color: #fdf8ec !important; /* green-50 */
-            color: #783c04 !important; /* green-700 */
-        }              
-    </style>
-</head>
-<body class="py-10 px-4">
+* {
+  box-sizing: border-box;
+}
 
-    <!-- メインコンテナ -->
-    <div class="max-w-xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
-        
-        <!-- ヘッダー部分 -->
-        <div class="bg-orange-500 text-white text-center py-6">
-            <h1 class="text-2xl font-bold">WAOの4問謎</h1>
-            <p class="text-sm mt-2 opacity-80">ご購入ありがとうございます。<br>
-                『WAOの4問謎』は100枚限定販売です。<br>
-                ポストカード・シールとも各100枚のみ印刷しており、増刷の予定はございません。<br>
-                お問い合わせは、下記メールアドレスまでお願い致します。<br><br>
-                各問題の答えを入力し、【解答する】を押してください。</p>
-        </div>
+body {
+  margin: 0;
+  font-family: "Hiragino Kaku Gothic ProN";
+}
 
-        <!--正解を自動入力する-->
-        <button type="button"
-            onclick="fillAnswers()"
-            class="w-full bg-green-100 hover:bg-green-100 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 mb-4"> 
-            テスト用: 自動入力
-        </button>
-         <!-- ▲▲▲ 追加ここまで ▲▲▲ -->
+a {
+  text-decoration: none;
+}
 
-        <!-- フォーム部分 -->
-        <div class="p-8">
-            <form id="quizForm" onsubmit="event.preventDefault(); showFinalResult();">
-                
-                <!-- 問題1 -->
-                <div class="mb-6">
-                    <label for="ans1" class="block text-gray-700 font-bold mb-2">♥の謎</label>
-                    <input type="text" id="ans1" required placeholder="ひらがなで入力" data-index="0"
-                           class="quiz-input w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent transition">
-                </div>
+.container {
+  width: 100%;
+  padding: 0 15px;
+  margin: 0 auto;
+}
 
-                <!-- 問題2 -->
-                <div class="mb-6">
-                    <label for="ans2" class="block text-gray-700 font-bold mb-2">♠の謎</label>
-                    <input type="text" id="ans2" required placeholder="ひらがなで入力"  data-index="1"
-                           class="quiz-input w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent transition">
-                </div>
+.top-wrapper {
+  padding: 180px 0 100px 0;
+  background-image: url(top.png);
+  background-size: cover;
+  color: white;
+  text-align: center;
+}
 
-                <!-- 問題3 -->
-                <div class="mb-6">
-                    <label for="ans3" class="block text-gray-700 font-bold mb-2">♦の謎</label>
-                    <input type="text" id="ans3" required placeholder="ひらがなで入力"  data-index="2"
-                           class="quiz-input w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent transition">
-                </div>
+.top-wrapper h1 {
+  opacity: 0.7;
+  font-size: 45px;
+  letter-spacing: 5px;
+}
 
-                <!-- 問題4 -->
-                <div class="mb-6">
-                    <label for="ans4" class="block text-gray-700 font-bold mb-2">♣の謎</label>
-                    <input type="text" id="ans4" required placeholder="ひらがなで入力"  data-index="3"
-                           class="quiz-input w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent transition">
-                </div>
+.top-wrapper p {
+  opacity: 0.7;
+  font-size: 16px;
+  margin-bottom: 40px;
+}
 
-                <!-- 送信ボタン -->
-                <button type="submit" 
-                        class="w-full bg-orange-500 hover:bg-orange-700 text-white font-bold py-3 px-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
-                    解答する
-                </button>
-            </form>
+.btn-wrapper {
+  text-align: center;
+}
 
-            <!-- 結果表示エリア -->
-            <div id="resultArea" class="mt-8 hidden border-t border-gray-200 pt-6 text-center">
-                <!-- お疲れ様画像 -->
-                <div class="flex justify-center mb-4">
-                    <img src="https://drive.google.com/thumbnail?id=1SCrjqN_1AWq7w3_9XC_p8mKl5jwGOWbB&sz=w500" alt="お疲れ様" 
-                    class="max-w-full h-auto block mx-auto shadow-md" />
-                </div>
-                    <!-- ▼▼▼ 追加：1問だけのクイズ ▼▼▼ -->
-                <div id="extraQuiz" class="mt-6">
-                    <p class="mb-2">遊んで頂きありがとうございました。<br>
-                    ※『WAOの4問謎』は、全4パターンを制作致しました。<br>
-                    4つのクリア画像を組み合わせると【最終問題】が完成します。<br>
-                    ※頒布はお1人様1枚のみとさせて頂きます。</p>
-                    <input id="extraInput" type="text" required placeholder="最終問題の答えを入力" 
-                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
-                    <button type="button"
-                        onclick="checkExtraQuiz()"
-                        class="w-full bg-orange-500 hover:bg-orange-700 text-white font-bold py-3 px-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 mt-4">
-                        解答する
-                    </button>
-                    <img id="extraImage" class="mx-auto mt-4 w-64 h-auto hidden" />
-                    <p id="extraResult" class="mt-3 text-xl font-bold"></p>
-                </div>
-                <!-- ▲▲▲ 追加ここまで ▲▲▲ -->
+.btn-wrapper p {
+  margin-bottom: 20px;
+}
 
-                <button onclick="location.reload()" class="mt-4 text-sm text-blue-500 underline">リセット</button>
-            </div>
-        </div>
-    </div>
+.signup {
+  background-color: #239b76;
+}
 
-    <script>
-        // 正解の配列
-        const correctAnswers1 = ["ことり", "くだもの", "とほ", "ほとけ"];
-        const correctAnswers2 = ["あいこ", "たとえ", "そと", "まね"];
-        const correctAnswers3 = ["けいま", "めとろ", "じょし", "たま"];
-        const correctAnswers4 = ["はーと", "おとめ", "あな", "ま"];
-        // 全ての入力欄を取得
-        const inputs = document.querySelectorAll('.quiz-input');
+.facebook {
+  background-color: #3b5998;
+  margin-right: 10px;
+}
 
-        // 各入力欄にリアルタイム判定イベントを追加
-        inputs.forEach(input => {
-            input.addEventListener('input', function() {
-                const index = parseInt(this.getAttribute('data-index'));
-                const userAnswer = this.value.trim();
-                const actualAnswer1 = correctAnswers1[index];
-                const actualAnswer2 = correctAnswers2[index];
-                const actualAnswer3 = correctAnswers3[index];
-                const actualAnswer4 = correctAnswers4[index];
+.twitter {
+  background-color: #55acee;
+}
 
-                // 正解の場合のみ色を変える
-                if (userAnswer === actualAnswer1) {
-                    this.classList.add('input-correct1');
-                }else if (userAnswer === actualAnswer2) {
-                    this.classList.add('input-correct2');
-                }else if (userAnswer === actualAnswer3) {
-                    this.classList.add('input-correct3');
-                }else if (userAnswer === actualAnswer4) {
-                    this.classList.add('input-correct4');
-                } else {
-                    // 不正解または入力中の場合は標準スタイルに戻す
-                    this.classList.remove('input-correct1');
-                    this.classList.remove('input-correct2');
-                    this.classList.remove('input-correct3');
-                    this.classList.remove('input-correct4');                   
-                }
-            });
-        });
+.btn {
+  padding: 8px 24px;
+  color: white;
+  display: inline-block;
+  opacity: 0.8;
+  border-radius: 4px;
+  text-align: center;
+}
 
-        // 「最終結果を表示」ボタンを押した時の処理
-        function showFinalResult() {
-        let score = 0;
+.btn:hover {
+  opacity: 1;
+}
 
-        // ▼▼▼ どのセットが全問正解か判定 ▼▼▼
-        let usedSet = null;
+.fa {
+  margin-right: 5px;
+}
 
-        // セット1
-        if (inputs[0].value.trim() === correctAnswers1[0] &&
-            inputs[1].value.trim() === correctAnswers1[1] &&
-            inputs[2].value.trim() === correctAnswers1[2] &&
-            inputs[3].value.trim() === correctAnswers1[3]) {
-            usedSet = 1;
-        }
+header {
+  height: 65px;
+  width: 100%;
+  background-color: rgba(34,49,52,0.9);
+  position :fixed;
+  top: 0;
+  z-index: 10;
+}
 
-        // セット2
-        if (inputs[0].value.trim() === correctAnswers2[0] &&
-            inputs[1].value.trim() === correctAnswers2[1] &&
-            inputs[2].value.trim() === correctAnswers2[2] &&
-            inputs[3].value.trim() === correctAnswers2[3]) {
-            usedSet = 2;
-        }
+.logo {
+  width: 124px;
+  margin-top: 20px;
+}
 
-        // セット3
-        if (inputs[0].value.trim() === correctAnswers3[0] &&
-            inputs[1].value.trim() === correctAnswers3[1] &&
-            inputs[2].value.trim() === correctAnswers3[2] &&
-            inputs[3].value.trim() === correctAnswers3[3]) {
-            usedSet = 3;
-        }
+.header-left {
+  float: left;
+}
 
-        // セット4
-        if (inputs[0].value.trim() === correctAnswers4[0] &&
-            inputs[1].value.trim() === correctAnswers4[1] &&
-            inputs[2].value.trim() === correctAnswers4[2] &&
-            inputs[3].value.trim() === correctAnswers4[3]) {
-            usedSet = 4;
-        }
+.header-right {
+  float: right;
+  margin-right: -25px;
+}
 
-        // ▼▼▼ スコア計算（従来通り） ▼▼▼
-        inputs.forEach((input, index) => {
-            if (input.value.trim() === correctAnswers1[index]) score++;
-        });
+.header-right a {
+  line-height: 65px;
+  padding: 0 25px;
+  color: white;
+  display: block;
+  float: left;
+  transition: all 0.5s;
+}
 
-        const resultImg = document.querySelector("#resultArea img");
+.header-right a:hover {
+  background-color: rgba(255,255,255,0.3);
+}
 
-            // ▼▼▼ セットごとに画像を切り替え ▼▼▼
-            if (usedSet === 1) {
-                resultImg.src = "https://drive.google.com/thumbnail?id=1SCrjqN_1AWq7w3_9XC_p8mKl5jwGOWbB&sz=w500";
-            } else if (usedSet === 2) {
-                resultImg.src = "https://drive.google.com/thumbnail?id=1zonYBALx-gIiWrRbw_mzU70z5finhA3p&sz=w500";
-            } else if (usedSet === 3) {
-                resultImg.src = "https://drive.google.com/thumbnail?id=1xVDr8wDxtPPwOb_B0IQezw3Cy9ijJdsw&sz=w500";
-            } else if (usedSet === 4) {
-                resultImg.src = "https://drive.google.com/thumbnail?id=1cqQSvxvhn9WIj5O9zfbgKjnw_lhgrG4S&sz=w500";
-            } else {
-            // 誤答あり
-                resultImg.src = "https://via.placeholder.com/500x300.png?text=Incorrect";
-            }
+.lesson-wrapper {
+  height: 580px;
+  padding-bottom: 80px;
+  padding-left: 5%;
+  padding-right: 5%;
+  background-color: #f7f7f7;
+  text-align: center;
+}
 
-            const resultArea = document.getElementById("resultArea");
-            resultArea.classList.remove("hidden");
-            resultArea.scrollIntoView({ behavior: 'smooth' });
-        }
-        
-        // ▼▼▼ 自動入力関数を追加 ▼▼▼
-        function fillAnswers() {
-            inputs.forEach((input, index) => {
-                input.value = correctAnswers2[index];
-            });
-        }
-        // ▲▲▲ ここまで ▲▲▲
-        // ▼▼▼ 追加：1問だけのクイズの正誤判定 ▼▼▼
-        function checkExtraQuiz() {
-            const user = document.getElementById("extraInput").value.trim();
-            const correct = "まとめ";  // ← 正解をここに書く
-            const resultImg = document.getElementById("extraImage");
-            const result = document.getElementById("extraResult");
+.heading {
+  padding-top: 80px;
+  padding-bottom: 50px;
+  color: #5f5d60;
+}
 
-            if (user === correct) {
-                resultImg.src = "https://drive.google.com/thumbnail?id=1YsPwHuSjuHiqqTOTY3i_fDug3n4zjpGM&sz=w500";
-                resultImg.classList.remove("hidden");
-                result.textContent = "正解！";
-                result.style.color = "green";
-            } else {
-                resultImg.src = "https://via.placeholder.com/500x300.png?text=Incorrect";
-                result.textContent = "不正解…";
-                result.style.color = "red";
-            }
+.heading h2 {
+  font-weight: normal;
+}
 
-        }
-        // ▲▲▲ 追加ここまで ▲▲▲
-    </script>
-</body>
-</html>
+.lesson {
+  float: left;
+  width: 25%;
+}
+
+.lesson-icon {
+  position: relative;
+}
+
+.lesson-icon p {
+  position: absolute;
+  top: 37%;
+  width: 100%;
+  color: white;
+}
+
+.text-contents {
+  width: 80%;
+  display: inline-block;
+  margin-top: 15px;
+  font-size: 13px;
+  color: #b3aeb5;
+}
+
+.heading h3 {
+  font-weight: normal;
+}
+
+.message-wrapper {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 80px;
+  text-align: center;
+}
+
+.message {
+  padding: 15px 40px;
+  background-color: #5dca88;
+  cursor: pointer;
+  box-shadow: 0px 7px #1a7940;
+}
+
+.message:active {
+  position: relative;
+  top: 7px;
+  box-shadow: none;
+}
+
+footer img {
+  width: 125px;
+}
+
+footer p {
+  color: #b3aeb5;
+  font-size: 12px;
+}
+
+footer {
+  padding-top: 30px;
+  padding-bottom: 20px;
+}
+
+.menu-icon {
+  color: white;
+  float: right;
+  font-size: 25px;
+  padding: 21px 0;
+  display: none;
+}
+
+.clear {
+  clear: left;
+}
+
+@media all and (max-width: 1000px) {
+  .lesson {
+    width: 50%;
+    margin-bottom: 50px;
+  }
+
+  .lesson-wrapper {
+    height: 990px;
+  }
+
+  footer {
+    text-align: center;
+  }
+}
+
+@media all and (max-width: 750px) {
+  .top-wrapper h1 {
+    font-size: 32px;
+  }
+
+  .heading h2 {
+    font-size: 20px;
+  }
+}
+
+@media all and (max-width: 670px) {
+  .header-right {
+    display: none;
+  }
+
+  .menu-icon {
+    display: block;
+  }
+
+  .top-wrapper .btn {
+    width: 100%;
+  }
+
+  .twitter {
+    margin-top: 10px;
+  }
+
+  .top-wrapper {
+    text-align: left;
+  }
+
+  .top-wrapper h1 {
+    font-size: 24px;
+  }
+
+  .top-wrapper p {
+    font-size: 14px;
+  }
+
+  .lesson {
+    width: 100%;
+  }
+
+  .lesson-wrapper {
+    height: 1700px;
+  }
+
+  .message-wrapper .btn {
+    width: 100%;
+  }
+}
