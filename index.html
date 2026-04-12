@@ -103,7 +103,9 @@
                     <img src="https://drive.google.com/thumbnail?id=1SCrjqN_1AWq7w3_9XC_p8mKl5jwGOWbB&sz=w500" alt="クリア画像" 
                     class="max-w-full h-auto block mx-auto shadow-md">
                 </div>
-                    <!-- ▼▼▼ 追加：1問だけのクイズ ▼▼▼ -->
+                <div id="incorrect" class="mt-6">
+                    <p class="mb-2">間違いがあります。</p>
+                </div> 
                 <div id="extraQuiz" class="mt-6">
                     <p class="mb-2">遊んで頂きありがとうございました。<br>
                     ※『WAOの4問謎』は、全4パターンを制作致しました。<br>
@@ -219,17 +221,21 @@
         // ▼▼▼ セットごとに画像を切り替え ▼▼▼
         if (usedSet === 1) {
             resultImg.src = "https://drive.google.com/thumbnail?id=1SCrjqN_1AWq7w3_9XC_p8mKl5jwGOWbB&sz=w500";
+            document.getElementById("incorrect").classList.add("hidden");
         } else if (usedSet === 2) {
             resultImg.src = "https://drive.google.com/thumbnail?id=1zonYBALx-gIiWrRbw_mzU70z5finhA3p&sz=w500";
+            document.getElementById("incorrect").classList.add("hidden");
         } else if (usedSet === 3) {
             resultImg.src = "https://drive.google.com/thumbnail?id=1xVDr8wDxtPPwOb_B0IQezw3Cy9ijJdsw&sz=w500";
+            document.getElementById("incorrect").classList.add("hidden");
         } else if (usedSet === 4) {
             resultImg.src = "https://drive.google.com/thumbnail?id=1cqQSvxvhn9WIj5O9zfbgKjnw_lhgrG4S&sz=w500";
+            document.getElementById("incorrect").classList.add("hidden");
         } else {
         // 誤答あり
             resultImg.classList.add("hidden");  // ← 画像を隠す
-            document.querySelector("#extraQuiz p").innerHTML = "答えが違います。もう一度挑戦してみてください。";
-       }
+            document.getElementById("extraQuiz").classList.add("hidden");
+        }
 
         const resultArea = document.getElementById("resultArea");
             resultArea.classList.remove("hidden");
