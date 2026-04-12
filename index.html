@@ -118,7 +118,7 @@
                         class="w-full bg-orange-500 hover:bg-orange-700 text-white font-bold py-3 px-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 mt-4">
                         解答する
                 </button>
-            <img id="extraImage" class="mx-auto mt-4 w-64 h-auto hidden">
+            <img id="extraImage" class="mx-auto mt-4 w-[500px] h-auto hidden">
             <p id="extraResult" class="mt-3 text-xl font-bold"></p>
             </div>
             <!-- ▲▲▲ 追加ここまで ▲▲▲ -->
@@ -260,7 +260,7 @@
             if (user === correct) {
                 resultImg.src = "https://drive.google.com/thumbnail?id=1YsPwHuSjuHiqqTOTY3i_fDug3n4zjpGM&sz=w500";
                 resultImg.classList.remove("hidden");
-                result.textContent = "正解！";
+                result.textContent = "正解です！最後まで遊んで頂きありがとうございました。";
                 result.style.color = "green";
             } else {
                 resultImg.src = "https://via.placeholder.com/500x300.png?text=Incorrect";
