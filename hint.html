@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>WAOの4枚謎 ヒント</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
+    }
+
+    .hint-box {
+      margin-bottom: 20px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      cursor: pointer;
+      background: #4a90e2;
+      color: white;
+      border: none;
+      border-radius: 6px;
+    }
+
+    .hint {
+      margin-top: 10px;
+      padding: 12px;
+      background: #fff8c6;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      display: none;
+      white-space: pre-wrap;
+    }
+
+.answer-grid {
+  display: none;              /* 最初は非表示 */
+  margin-top: 20px;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.answer-grid a img {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+.answer-button {
+  background: #ff9800;   /* オレンジ */
+  color: white;
+}
+
+.answer-button:hover {
+  background: #e68900;   /* 少し濃いオレンジ（ホバー時） */
+}
+
+  </style>
+</head>
+<body>
+
+  <h2>WAOの4枚謎 ヒント</h2>
+
+  <div class="hint-box">
+    <button onclick="toggleHint('hint1')">左上の謎</button>
+    <div id="hint1" class="hint">イラストは、砂糖（さ と う）→ 乗馬 です。</div>
+  </div>
+
+  <div class="hint-box">
+    <button onclick="toggleHint('hint2')">左下の謎</button>
+    <div id="hint2" class="hint">♦の答えを2つに分解し、その間の文字を読みます。</div>
+  </div>
+
+  <div class="hint-box">
+    <button onclick="toggleHint('hint3')">右下の謎</button>
+    <div id="hint3" class="hint">「ね」の二乗＝「いえ」になります。</div>
+  </div>
+
+  <div class="hint-box">
+    <button onclick="toggleHint('hint4')">右上の謎</button>
+    <div id="hint4" class="hint">♡の答えを見つけて、2つのイラストを線で結びましょう。</div>
+  </div>
+
+  <div class="hint-box">
+    <button onclick="toggleHint('hint5')">どこから解けばよいか分からない</button>
+    <div id="hint5" class="hint">左上の謎のルールから、♡の謎の答えは「○と○」になると想定されます。
+♡の謎を見て、真ん中に「と」が入る、答えになりそうな言葉を探しましょう。</div>
+  </div>
+
+<div class="hint-box">
+<button class="answer-button" onclick="toggleAnswer()">解答・解説を見る</button>
+  <div id="answerArea" class="answer-grid">
+
+    <!-- 説明文 -->
+    <div style="grid-column: 1 / -1; font-size: 14px; margin-bottom: 10px;">
+      　購入者認証のため、ポストカードに貼られたシールを選択してください。
+    </div>
+
+    <a href="explanationa.html" target="_blank">
+      <img src="シールa.png" alt="Answer1">
+    </a>
+
+    <a href="explanationb.html" target="_blank">
+      <img src="シールb.png" alt="Answer2">
+    </a>
+
+    <a href="explanationc.html" target="_blank">
+      <img src="シールc.png" alt="Answer3">
+    </a>
+
+    <a href="explanationd.html" target="_blank">
+      <img src="シールd.png" alt="Answer4">
+    </a>
+
+  </div>
+</div>
+
+  <script>
+  function toggleHint(id) {
+    const target = document.getElementById(id);
+
+    // 今の表示状態を確認
+    const isOpen = target.style.display === 'block';
+
+    // トグル動作：開いていれば閉じる、閉じていれば開く
+    target.style.display = isOpen ? 'none' : 'block';
+  }
+
+  function toggleAnswer() {
+    const area = document.getElementById('answerArea');
+    const isOpen = area.style.display === 'grid';
+    area.style.display = isOpen ? 'none' : 'grid';
+  }
+
+  </script>
+
+</body>
+</html>
