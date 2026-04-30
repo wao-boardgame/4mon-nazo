@@ -106,8 +106,8 @@
             <div id="resultArea" class="mt-8 hidden border-t border-gray-200 pt-6 text-center">
                 <!-- クリア画像 -->
                 <div class="flex justify-center mb-4">
-                    <img src="https://drive.google.com/thumbnail?id=1SCrjqN_1AWq7w3_9XC_p8mKl5jwGOWbB&sz=w500" alt="入力完了" 
-                    class="max-w-full h-auto block mx-auto shadow-md">
+                    <img id="resultImage" src="" alt="入力完了" 
+                    class="max-w-full h-auto block mx-auto shadow-md hidden">
                 </div> 
                 <div id="incorrect" class="mt-6">
                     <p class="mb-2">間違いがあります。</p>
@@ -252,7 +252,7 @@
     //const scoreDisplay = document.getElementById("scoreDisplay");
     //scoreDisplay.textContent = `全問中 ${score} 問正解しました！`;
 
-    const resultImg = document.querySelector("#resultArea img");
+    const resultImg = document.getElementById("resultImage");
 
         // ▼▼▼ セットごとに画像を切り替え ▼▼▼
         if (usedSet === 1) {
