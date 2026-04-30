@@ -57,7 +57,7 @@
         </button>-->
          <!-- ▲▲▲ 追加ここまで ▲▲▲ -->
 
-        <!-- フォーム部分 -->
+       <!-- フォーム部分 -->
         <div class="p-8">
             <form id="quizForm" onsubmit="event.preventDefault(); showFinalResult();">
                 
@@ -114,7 +114,7 @@
                 </div> 
 
             <!-- X（Twitter）ポストボタン -->
-                <div class="mt-6 flex justify-center">
+                <div id="xShareButton" class="mt-6 flex justify-center hidden">
                     <a href="https://twitter.com/intent/tweet?text=%E3%82%B2%E3%83%A0%E3%83%9E%E9%99%90%E5%AE%9A%E9%A0%92%E5%B8%83%E3%80%8EWAO%E3%81%AE4%E5%95%8F%E8%AC%8E%E3%80%8F%E3%82%92%E3%82%AF%E3%83%AA%E3%82%A2%E3%81%97%E3%81%9F%EF%BC%81%0A%0A%23WAO%E8%AC%8E%20%234%E5%95%8F%E8%AC%8E%0A%0Ahttps%3A%2F%2Fgamemarket.jp%2Fgame%2F188080" 
                        target="_blank" 
                        rel="noopener noreferrer"
@@ -255,30 +255,37 @@
     const resultImg = document.getElementById("resultImage");
 
         // ▼▼▼ セットごとに画像を切り替え ▼▼▼
+        const xShareButton = document.getElementById("xShareButton");
+        
         if (usedSet === 1) {
             resultImg.src = "CLEAR_A.png";
             resultImg.classList.remove("hidden");  // 画像を表示
             document.getElementById("incorrect").classList.add("hidden");
             document.getElementById("extraQuiz").classList.remove("hidden");  // 追加クイズも表示
+            xShareButton.classList.remove("hidden");  // Xポストボタンを表示
         } else if (usedSet === 2) {
             resultImg.src = "CLEAR_B.png";
             resultImg.classList.remove("hidden");  // 画像を表示
             document.getElementById("incorrect").classList.add("hidden");
             document.getElementById("extraQuiz").classList.remove("hidden");  // 追加クイズも表示
+            xShareButton.classList.remove("hidden");  // Xポストボタンを表示
         } else if (usedSet === 3) {
             resultImg.src = "CLEAR_C.png";
             resultImg.classList.remove("hidden");  // 画像を表示
             document.getElementById("incorrect").classList.add("hidden");
             document.getElementById("extraQuiz").classList.remove("hidden");  // 追加クイズも表示
+            xShareButton.classList.remove("hidden");  // Xポストボタンを表示
         } else if (usedSet === 4) {
             resultImg.src = "CLEAR_D.png";
             resultImg.classList.remove("hidden");  // 画像を表示
             document.getElementById("incorrect").classList.add("hidden");
             document.getElementById("extraQuiz").classList.remove("hidden");  // 追加クイズも表示
+            xShareButton.classList.remove("hidden");  // Xポストボタンを表示
         } else {
         // 誤答あり
             resultImg.classList.add("hidden");  // ← 画像を隠す
             document.getElementById("extraQuiz").classList.add("hidden");
+            xShareButton.classList.add("hidden");  // Xポストボタンを隠す
         }
         const resultArea = document.getElementById("resultArea");
             resultArea.classList.remove("hidden");
